@@ -12,6 +12,8 @@ function initializePage() {
 	$('.project a').click(addProjectDetails);
 
 	$('#colorBtn').click(randomizeColors);
+
+	$('#photoBtn').click(addPhotoBackground);
 }
 
 /*
@@ -38,10 +40,10 @@ function addProjectDetails(e) {
 function addProject(result){
 	console.log(result);
 	var projectHTML = '<a href="#" class="thumbnail">' + '<img src="'+
-	result['image'] + '"class="detailIsImage">'+
+	result['image'] + '"class="detailsImage">'+
 	'<p>' + result['title'] + '</p>' + 
-	'<p><small>' + result['date'] + '</small></p>' + 
-	'<div>'+result['summary'] + '</div></a>';
+	'<p><small>' + result['date'] + '</small></p></a>' + 
+	'<div>'+result['summary'] + '</div>';
 	$("#project"+result["id"] + " .details").html(projectHTML);
 }
 
@@ -62,4 +64,18 @@ function getColors(result){
 	$('h1, h2, h3, h4, h5, h5').css('color', colors[2]);
 	$('p').css('color', colors[3]);
 	$('.project img').css('opacity', .75);
+}
+
+function addPhotoBackground (e) {
+	var url = "http://www.panoramio.com/map/get_panoramas.php?set=public&from=0&to=20&minx=-180&miny=-90&maxx=180&maxy=90&size=original&mapfilter=true";
+	$.get(url,addPhoto, 'jsonp');
+}
+
+function addPhoto(result){
+	var photoArr = result.photos;
+	var randomInt = Math.floor((Math.random()*20)+1);
+	var photoURL  = photoArr[randomInt].photo_file_url;
+	$("body").css('background', "url("+photoURL+") center");
+	$(".jumbotron").css('background-color', "#FFFFFF");
+	$(".jumbotron").css('opacity', 0.8);
 }

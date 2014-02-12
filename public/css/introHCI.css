@@ -17,7 +17,7 @@
 .jumbotron:after {
      content:"";
      background: url("../images/lorempixel.jumbotron.jpeg");
-     opacity: 0.2;
+     opacity: 0.5;
      top: 0;
      left: 0;
      bottom: 0;
@@ -42,4 +42,8 @@
      width: 200px;
      margin: 10px 10px 10px 0px;
      float: left;
+}
+
+.container:after{
+     opacity: 1;
 }
